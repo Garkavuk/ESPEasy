@@ -6,7 +6,6 @@
 #define CPLUGIN_ID_001         1
 #define CPLUGIN_NAME_001       "Domoticz HTTP"
 
-
 boolean CPlugin_001(byte function, struct EventStruct *event, String& string)
 {
   boolean success = false;
@@ -75,7 +74,7 @@ boolean CPlugin_001(byte function, struct EventStruct *event, String& string)
           {
             case SENSOR_TYPE_SINGLE:                      // single value sensor, used for Dallas, BH1750, etc
               url += F("&svalue=");
-              url += formatUserVar(event, 0);
+              url += toString(UserVar[event->BaseVarIndex], ExtraTaskSettings.TaskDeviceValueDecimals[0]);
               break;
             case SENSOR_TYPE_LONG:                      // single LONG value, stored in two floats (rfid tags)
               url += F("&svalue=");
@@ -83,53 +82,53 @@ boolean CPlugin_001(byte function, struct EventStruct *event, String& string)
               break;
             case SENSOR_TYPE_DUAL:                       // any sensor that uses two simple values
               url += F("&svalue=");
-              url += formatUserVar(event, 0);
+              url += toString(UserVar[event->BaseVarIndex], ExtraTaskSettings.TaskDeviceValueDecimals[0]);
               url += (";");
-              url += formatUserVar(event, 1);
+              url += toString(UserVar[event->BaseVarIndex + 1], ExtraTaskSettings.TaskDeviceValueDecimals[1]);
               break;
             case SENSOR_TYPE_TEMP_HUM:                      // temp + hum + hum_stat, used for DHT11
               url += F("&svalue=");
-              url += formatUserVar(event, 0);
+              url += toString(UserVar[event->BaseVarIndex], ExtraTaskSettings.TaskDeviceValueDecimals[0]);
               url += F(";");
-              url += formatUserVar(event, 1);
+              url += toString(UserVar[event->BaseVarIndex + 1], ExtraTaskSettings.TaskDeviceValueDecimals[1]);
               url += F(";");
               url += humStat(UserVar[event->BaseVarIndex + 1]);
               break;
             case SENSOR_TYPE_TEMP_BARO:                      // temp + hum + hum_stat + bar + bar_fore, used for BMP085
               url += F("&svalue=");
-              url += formatUserVar(event, 0);
+              url += toString(UserVar[event->BaseVarIndex], ExtraTaskSettings.TaskDeviceValueDecimals[0]);
               url += F(";0;0;");
-              url += formatUserVar(event, 1);
+              url += toString(UserVar[event->BaseVarIndex + 1], ExtraTaskSettings.TaskDeviceValueDecimals[1]);
               url += F(";0");
               break;
             case SENSOR_TYPE_TRIPLE:
               url += F("&svalue=");
-              url += formatUserVar(event, 0);
+              url += toString(UserVar[event->BaseVarIndex], ExtraTaskSettings.TaskDeviceValueDecimals[0]);
               url += F(";");
-              url += formatUserVar(event, 1);
+              url += toString(UserVar[event->BaseVarIndex + 1], ExtraTaskSettings.TaskDeviceValueDecimals[1]);
               url += F(";");
-              url += formatUserVar(event, 2);
+              url += toString(UserVar[event->BaseVarIndex + 2], ExtraTaskSettings.TaskDeviceValueDecimals[2]);
               break;
             case SENSOR_TYPE_TEMP_HUM_BARO:                      // temp + hum + hum_stat + bar + bar_fore, used for BME280
               url += F("&svalue=");
-              url += formatUserVar(event, 0);
+              url += toString(UserVar[event->BaseVarIndex], ExtraTaskSettings.TaskDeviceValueDecimals[0]);
               url += F(";");
-              url += formatUserVar(event, 1);
+              url += toString(UserVar[event->BaseVarIndex + 1], ExtraTaskSettings.TaskDeviceValueDecimals[1]);
               url += F(";");
               url += humStat(UserVar[event->BaseVarIndex + 1]);
               url += F(";");
-              url += formatUserVar(event, 2);
+               url += toString(UserVar[event->BaseVarIndex + 2], ExtraTaskSettings.TaskDeviceValueDecimals[2]);
               url += F(";0");
               break;
             case SENSOR_TYPE_QUAD:
               url += F("&svalue=");
-              url += formatUserVar(event, 0);
+              url += toString(UserVar[event->BaseVarIndex], ExtraTaskSettings.TaskDeviceValueDecimals[0]);
               url += F(";");
-              url += formatUserVar(event, 1);
+              url += toString(UserVar[event->BaseVarIndex + 1], ExtraTaskSettings.TaskDeviceValueDecimals[1]);
               url += F(";");
-              url += formatUserVar(event, 2);
+              url += toString(UserVar[event->BaseVarIndex + 2], ExtraTaskSettings.TaskDeviceValueDecimals[2]);
               url += F(";");
-              url += formatUserVar(event, 3);
+              url += toString(UserVar[event->BaseVarIndex + 3], ExtraTaskSettings.TaskDeviceValueDecimals[3]);
               break;
             case SENSOR_TYPE_SWITCH:
               url = F("/json.htm?type=command&param=switchlight&idx=");
@@ -154,7 +153,7 @@ boolean CPlugin_001(byte function, struct EventStruct *event, String& string)
               break;
             case (SENSOR_TYPE_WIND):
               url += F("&svalue=");                   // WindDir in degrees; WindDir as text; Wind speed average ; Wind speed gust; 0
-              url += formatUserVar(event, 0);
+              url += toString(UserVar[event->BaseVarIndex],ExtraTaskSettings.TaskDeviceValueDecimals[0]);
               url += ";";
               url += getBearing(UserVar[event->BaseVarIndex]);
               url += ";";
