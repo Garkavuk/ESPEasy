@@ -137,7 +137,7 @@ void getWebPageTemplateDefault(const String& tmplName, String& tmpl)
               "<h1>Welcome to ESP Easy Mega AP</h1>"
               "{{error}}"
               "{{content}}"
-              "<BR><h6>Powered by www.letscontrolit.com</h6>"
+              "<BR><h6>Powered by Garkavuk Taras</h6>"
               "</body>"
             );
   }
@@ -153,7 +153,7 @@ void getWebPageTemplateDefault(const String& tmplName, String& tmpl)
               "<h1>ESP Easy Mega: {{name}}</h1>"
               "{{error}}"
               "{{content}}"
-              "<BR><h6>Powered by www.letscontrolit.com</h6>"
+              "<BR><h6>Powered by Garkavuk Taras</h6>"
               "</body>"
             );
   }
@@ -174,7 +174,7 @@ void getWebPageTemplateDefault(const String& tmplName, String& tmpl)
         "{{error}}"
         "{{content}}"
         "<footer>"
-          "<h6>Powered by www.letscontrolit.com</h6>"
+          "<h6>Powered by Garkavuk Taras</h6>"
         "</footer>"
       "</body></html>"
             );
@@ -2397,7 +2397,7 @@ void handle_log() {
     do
     {
       counter++;
-      if (counter > 9)
+      if (counter > 19)
         counter = 0;
       if (Logging[counter].timeStamp > 0)
       {
